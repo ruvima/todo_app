@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:todo_app/models/todo_model.dart';
 import 'package:todo_app/providers/todo_list.dart';
 

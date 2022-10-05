@@ -26,7 +26,7 @@ class TodoSearchState extends Equatable {
   }
 }
 
-class TodoSerch with ChangeNotifier {
+class TodoSearch with ChangeNotifier {
   TodoSearchState _state = TodoSearchState.initial();
   TodoSearchState get state => _state;
   void setSearchTerm(String newSearchTerm) {

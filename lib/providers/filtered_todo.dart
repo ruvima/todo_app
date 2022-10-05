@@ -37,7 +37,7 @@ class FilteredTodos with ChangeNotifier {
 
   void update(
     TodoFilter todoFilter,
-    TodoSerch todoSerch,
+    TodoSearch todoSearch,
     TodoList todoList,
   ) {
     List<Todo> _filteredTodos;
@@ -56,10 +56,10 @@ class FilteredTodos with ChangeNotifier {
         break;
     }
 
-    if (todoSerch.state.searchTerm.isNotEmpty) {
+    if (todoSearch.state.searchTerm.isNotEmpty) {
       _filteredTodos = _filteredTodos
           .where((Todo todo) =>
-              todo.desc.toLowerCase().contains(todoSerch.state.searchTerm))
+              todo.desc.toLowerCase().contains(todoSearch.state.searchTerm))
           .toList();
     }
 
