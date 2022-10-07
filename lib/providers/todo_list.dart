@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:state_notifier/state_notifier.dart';
 import 'package:todo_app/models/todo_model.dart';
 
 class TodoListState extends Equatable {
@@ -32,21 +31,18 @@ class TodoListState extends Equatable {
   }
 }
 
-class TodoList with ChangeNotifier {
-  TodoListState _state = TodoListState.initial();
-
-  TodoListState get state => _state;
+class TodoList extends StateNotifier<TodoListState> {
+  TodoList() : super(TodoListState.initial());
 
   void addTodo(String todoDesc) {
     final newTodo = Todo(desc: todoDesc);
-    final newTodos = [..._state.todos, newTodo];
+    final newTodos = [...state.todos, newTodo];
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void editTodo(String id, String todoDesc) {
-    final newTodos = _state.todos.map((Todo todo) {
+    final newTodos = state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(
           id: id,
@@ -57,12 +53,11 @@ class TodoList with ChangeNotifier {
       return todo;
     }).toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void toggleTodo(String id) {
-    final newTodos = _state.todos.map((Todo todo) {
+    final newTodos = state.todos.map((Todo todo) {
       if (todo.id == id) {
         return Todo(
           id: id,
@@ -73,18 +68,16 @@ class TodoList with ChangeNotifier {
       return todo;
     }).toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 
   void removeTodo(Todo todo) {
-    final newTodos = _state.todos
+    final newTodos = state.todos
         .where(
           (Todo t) => t.id != todo.id,
         )
         .toList();
 
-    _state = _state.copyWith(todos: newTodos);
-    notifyListeners();
+    state = state.copyWith(todos: newTodos);
   }
 }
